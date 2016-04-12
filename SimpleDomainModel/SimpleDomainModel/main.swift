@@ -1,14 +1,12 @@
 import Foundation
 
-print("Hello, World!")
-
 public func testMe() -> String {
-    return "I have been tested"
+    return "I have been tested!"
 }
 
 public class TestMe {
     public func Please() -> String {
-        return "I have been tested"
+        return "I have been tested!"
     }
 }
 
@@ -17,16 +15,108 @@ public class TestMe {
 //
 public struct Money {
     
-    public var amount : Int
-    public var currency : String
+    public var amount: Int
+    public var currency: String
   
-    public func convert(to: String) -> Money {
+    // Calls conversions depending on the received currency.
+    public mutating func convert(to: String) -> Money {
+        if (to == "USD") {
+            convertUSD(to)
+        } else if (to == " GBP") {
+            convertGBP(to)
+        } else if (to == "EUR") {
+            convertEUR(to)
+        } else if (to == "CAN") {
+            convertCAN(to)
+        }
+        return self
+    }
     
+    // Converts from USD.
+    private mutating func convertUSD(to: String) {
+        var dubAmount = Double(amount)
+        if (to == "CAN") {
+            dubAmount = dubAmount * 1.25
+            amount = Int(dubAmount)
+            currency = "CAN"
+        }
+        if (to == "EUR") {
+            dubAmount = dubAmount * 1.5
+            amount = Int(dubAmount)
+            currency = "EUR"
+        }
+        if (to == "GBP") {
+            dubAmount = dubAmount * 0.5
+            amount = Int(dubAmount)
+            currency = "GBP"
+        }
+    }
+    
+    // Converts from CAN.
+    private mutating func convertCAN(to: String) {
+        var dubAmount = Double(amount)
+        dubAmount = dubAmount / 0.8
+        if (to == "USD") {
+            amount = Int(dubAmount)
+            currency = "USD"
+        }
+        if (to == "EUR") {
+            dubAmount = dubAmount * 1.5
+            amount = Int(dubAmount)
+            currency = "EUR"
+        }
+        if (to == "GBP") {
+            dubAmount = dubAmount * 0.5
+            amount = Int(dubAmount)
+            currency = "GBP"
+        }
+    }
+    
+    // Converts from EUR.
+    private mutating func convertEUR(to: String) {
+        var dubAmount = Double(amount)
+        dubAmount = dubAmount / 0.66
+        if (to == "CAN") {
+            dubAmount = dubAmount * 1.25
+            amount = Int(dubAmount)
+            currency = "CAN"
+        }
+        if (to == "USD") {
+            amount = Int(dubAmount)
+            currency = "USD"
+        }
+        if (to == "GBP") {
+            dubAmount = dubAmount * 0.5
+            amount = Int(dubAmount)
+            currency = "GBP"
+        }
+    }
+    
+    // Converts from GBP.
+    private mutating func convertGBP(to: String) {
+        var dubAmount = Double(amount)
+        dubAmount = dubAmount * 2
+        if (to == "CAN") {
+            dubAmount = dubAmount * 1.25
+            amount = Int(dubAmount)
+            currency = "CAN"
+        }
+        if (to == "EUR") {
+            dubAmount = dubAmount * 1.5
+            amount = Int(dubAmount)
+            currency = "EUR"
+        }
+        if (to == "USD") {
+            amount = Int(dubAmount)
+            currency = "USD"
+        }
     }
   
+    
     public func add(to: Money) -> Money {
     
     }
+    
     
     public func subtract(from: Money) -> Money {
         
