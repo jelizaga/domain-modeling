@@ -131,18 +131,35 @@ public struct Money {
 //
 public class Job {
     
+    public var title: String
+    public var salary: Money
+    public var type: JobType
+    
     public enum JobType {
+        
         case Hourly(Double)
         case Salary(Int)
+        
     }
   
-    public init(title : String, type : JobType) {
+    public init(title: String, type: JobType) {
+        self.title = title
+        self.type = type
     }
   
     public func calculateIncome(hours: Int) -> Int {
+        switch type {
+            case .Hourly(<#T##Double#>) {
+            
+            }
+            case .Salary(<#T##Int#>) {
+            
+            }
+        }
     }
   
     public func raise(amt : Double) {
+        
     }
     
 }
@@ -175,7 +192,9 @@ public class Person {
         self.age = age
     }
   
+    // Returns Person's name.
     public func toString() -> String {
+        return (firstName + " " + lastName)
     }
     
 }
