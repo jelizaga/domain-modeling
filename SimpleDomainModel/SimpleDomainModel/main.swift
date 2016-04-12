@@ -20,13 +20,13 @@ public struct Money {
   
     // Calls conversions depending on the received currency.
     public mutating func convert(to: String) -> Money {
-        if (to == "USD") {
+        if (currency == "USD") {
             convertUSD(to)
-        } else if (to == " GBP") {
+        } else if (currency == "GBP") {
             convertGBP(to)
-        } else if (to == "EUR") {
+        } else if (currency == "EUR") {
             convertEUR(to)
-        } else if (to == "CAN") {
+        } else if (currency == "CAN") {
             convertCAN(to)
         }
         return self
@@ -112,14 +112,16 @@ public struct Money {
         }
     }
   
-    
-    public func add(to: Money) -> Money {
-    
+    //
+    public mutating func add(to: Money) -> Money {
+        self.amount = self.amount + to.amount
+        return self
     }
     
-    
-    public func subtract(from: Money) -> Money {
-        
+    //
+    public mutating func subtract(from: Money) -> Money {
+        self.amount = self.amount - from.amount
+        return self
     }
     
 }
