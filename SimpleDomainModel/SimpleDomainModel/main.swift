@@ -177,21 +177,44 @@ public class Person {
     
     public var firstName : String = ""
     public var lastName : String = ""
-    public var age : Int = 0
+    public var age: Int = 0
 
-    public var job : Job? {
-        get { }
+    private var _job: Job?
+    private var _spouse: Person?
+    
+    // If Person has a job, return their job.
+    // If not, set the received Job to their job. If they're 16 or under, they have no job.
+    public var job: Job? {
+        get {
+            return self._job
+        }
         set(value) {
-            
+            if (age < 16) {
+                print("Person is too young to legally have a job.")
+                self._job = nil
+            } else {
+                self._job = value
+            }
         }
     }
   
-    public var spouse : Person? {
-        get { }
+    // If Person has a spouse, return spouse.
+    // If not, set private spouse to received Person.
+    public var spouse: Person? {
+        get {
+            return self._spouse
+        }
         set(value) {
+            if (age < 18) {
+                print("Person is too young to legally marry.")
+                self._spouse = nil
+            } else {
+                self._spouse = value
+            }
         }
     }
   
+    // Initializes a person.
     public init(firstName : String, lastName: String, age : Int) {
         self.firstName = firstName
         self.lastName = lastName
@@ -206,7 +229,7 @@ public class Person {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// CLASS: Family ///////////////////////////////////////////////////////////////////////////////////////////////////
+// CLASS: Family //////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class Family {
   
@@ -222,7 +245,7 @@ public class Family {
   
     }
   
-  
+  // 2000
     public func householdIncome() -> Int {
   
     }
