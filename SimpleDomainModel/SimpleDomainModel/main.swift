@@ -236,7 +236,6 @@ public class Person {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class Family {
   
-    //
     private var members: [Person] = []
   
     // Receives two Persons. If they each have no spouse, their spouse is set to each other.
@@ -245,16 +244,27 @@ public class Family {
             spouse1.spouse = spouse2
             spouse2.spouse = spouse1
         }
+        members.append(spouse1)
+        members.append(spouse2)
     }
   
-    //
+    // Test
     public func haveChild(child: Person) -> Bool {
-  
+        child.age = 0
+        var foundAdult = false
+        for person in members {
+            if person.age == 21 {
+                foundAdult = true
+            }
+        }
+        return foundAdult
     }
   
     // 2000
     public func householdIncome() -> Int {
-  
+        for person in family {
+           person.
+        }
     }
     
 }
