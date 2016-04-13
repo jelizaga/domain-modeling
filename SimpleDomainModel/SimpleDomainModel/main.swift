@@ -138,7 +138,6 @@ public class Job {
     public var title: String
     public var type: JobType
     
-    //
     public enum JobType {
         case Hourly(Double)
         case Salary(Int)
@@ -248,7 +247,7 @@ public class Family {
         members.append(spouse2)
     }
   
-    // Test
+    // Receives a Person, sets age to 0. Returns false if there's nobody in the family over 21.
     public func haveChild(child: Person) -> Bool {
         child.age = 0
         var foundAdult = false
@@ -262,9 +261,15 @@ public class Family {
   
     // 2000
     public func householdIncome() -> Int {
-        for person in family {
-           person.
+        var income = 0
+        for person in members {
+            let job = person.job
+            if (job != nil) {
+                let jobType = job!.type
+                income = income + job!.calculateIncome(<#T##hours: Int##Int#>)
+            }
         }
+        return income
     }
     
 }
