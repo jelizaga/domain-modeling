@@ -10,9 +10,9 @@ public class TestMe {
     }
 }
 
-////////////////////////////////////
-// Money
-//
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// STRUCT: Money //////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 public struct Money {
     
     public var amount: Int
@@ -28,6 +28,8 @@ public struct Money {
             convertEUR(to)
         } else if (currency == "CAN") {
             convertCAN(to)
+        } else {
+            print("Current currency is not USD, GBP, EUR, or CAN.")
         }
         return self
     }
@@ -39,16 +41,16 @@ public struct Money {
             dubAmount = dubAmount * 1.25
             amount = Int(dubAmount)
             currency = "CAN"
-        }
-        if (to == "EUR") {
+        } else if (to == "EUR") {
             dubAmount = dubAmount * 1.5
             amount = Int(dubAmount)
             currency = "EUR"
-        }
-        if (to == "GBP") {
+        } else if (to == "GBP") {
             dubAmount = dubAmount * 0.5
             amount = Int(dubAmount)
             currency = "GBP"
+        } else {
+            print("Currency to convert to is not USD, GBP, EUR, or CAN.")
         }
     }
     
@@ -59,16 +61,16 @@ public struct Money {
         if (to == "USD") {
             amount = Int(dubAmount)
             currency = "USD"
-        }
-        if (to == "EUR") {
+        } else if (to == "EUR") {
             dubAmount = dubAmount * 1.5
             amount = Int(dubAmount)
             currency = "EUR"
-        }
-        if (to == "GBP") {
+        } else if (to == "GBP") {
             dubAmount = dubAmount * 0.5
             amount = Int(dubAmount)
             currency = "GBP"
+        } else {
+            print("Currency to convert to is not USD, GBP, EUR, or CAN.")
         }
     }
     
@@ -80,15 +82,15 @@ public struct Money {
             dubAmount = dubAmount * 1.25
             amount = Int(dubAmount)
             currency = "CAN"
-        }
-        if (to == "USD") {
+        } else if (to == "USD") {
             amount = Int(dubAmount)
             currency = "USD"
-        }
-        if (to == "GBP") {
+        } else if (to == "GBP") {
             dubAmount = dubAmount * 0.5
             amount = Int(dubAmount)
             currency = "GBP"
+        } else {
+            print("Currency to convert to is not USD, GBP, EUR, or CAN.")
         }
     }
     
@@ -109,6 +111,8 @@ public struct Money {
         if (to == "USD") {
             amount = Int(dubAmount)
             currency = "USD"
+        } else {
+            print("Currency to convert to is not USD, GBP, EUR, or CAN.")
         }
     }
   
@@ -126,20 +130,17 @@ public struct Money {
     
 }
 
-////////////////////////////////////
-// Job
-//
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// CLASS: Job /////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 public class Job {
     
     public var title: String
-    public var salary: Money
     public var type: JobType
     
     public enum JobType {
-        
         case Hourly(Double)
         case Salary(Int)
-        
     }
   
     public init(title: String, type: JobType) {
@@ -147,6 +148,8 @@ public class Job {
         self.type = type
     }
   
+    // Receives hours and calculates hourly wage if job is waged by the hour.
+    // Receives hours and returns salary if job is salaried.
     public func calculateIncome(hours: Int) -> Int {
         switch type {
             case .Hourly(let hourly):
@@ -156,18 +159,20 @@ public class Job {
         }
     }
   
-    public func raise(amt : Double) {
-        switch(type) {
-        case .Hourly(let hourly):
-            type = JobType.Hourly(hourly + amt)
-        case .Salary(let salary):
-            type = JobType.Salary(salary + Int(amt))
+    // Receives an amount and adds it to the employee's salary/wage.
+    public func raise(amt: Double) {
+        switch type {
+            case .Hourly(let hourly):
+                type = JobType.Hourly(hourly + amt)
+            case .Salary(let salary):
+                type = JobType.Salary(salary + Int(amt))
+        }
     }
 }
 
-////////////////////////////////////
-// Person
-//
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// CLASS: Person //////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 public class Person {
     
     public var firstName : String = ""
@@ -200,9 +205,9 @@ public class Person {
     
 }
 
-////////////////////////////////////
-// Family
-//
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// CLASS: Family ///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 public class Family {
   
     private var members : [Person] = []
