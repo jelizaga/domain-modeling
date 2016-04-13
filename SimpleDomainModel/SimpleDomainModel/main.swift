@@ -116,13 +116,13 @@ public struct Money {
         }
     }
   
-    //
+    // Returns self, having added received money to self.
     public mutating func add(to: Money) -> Money {
         self.amount = self.amount + to.amount
         return self
     }
     
-    //
+    // Returns self, having subtracted received amount from self.
     public mutating func subtract(from: Money) -> Money {
         self.amount = self.amount - from.amount
         return self
@@ -138,11 +138,13 @@ public class Job {
     public var title: String
     public var type: JobType
     
+    //
     public enum JobType {
         case Hourly(Double)
         case Salary(Int)
     }
   
+    // Initializes Job with received string and JobType.
     public init(title: String, type: JobType) {
         self.title = title
         self.type = type
@@ -179,6 +181,7 @@ public class Person {
     public var lastName : String = ""
     public var age: Int = 0
 
+    // Private variables for
     private var _job: Job?
     private var _spouse: Person?
     
@@ -214,7 +217,7 @@ public class Person {
         }
     }
   
-    // Initializes a person.
+    // Initializes a Person.
     public init(firstName : String, lastName: String, age : Int) {
         self.firstName = firstName
         self.lastName = lastName
@@ -233,19 +236,23 @@ public class Person {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public class Family {
   
-    private var members : [Person] = []
+    //
+    private var members: [Person] = []
   
-  
+    // Receives two Persons. If they each have no spouse, their spouse is set to each other.
     public init(spouse1: Person, spouse2: Person) {
-  
+        if (spouse1.spouse == nil && spouse2.spouse == nil) {
+            spouse1.spouse = spouse2
+            spouse2.spouse = spouse1
+        }
     }
   
-  
+    //
     public func haveChild(child: Person) -> Bool {
   
     }
   
-  // 2000
+    // 2000
     public func householdIncome() -> Int {
   
     }
