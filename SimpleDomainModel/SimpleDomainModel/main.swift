@@ -265,8 +265,7 @@ public class Family {
         for person in members {
             let job = person.job
             if (job != nil) {
-                let jobType = job!.type
-                income = income + job!.calculateIncome(<#T##hours: Int##Int#>)
+                income += (person.job?.calculateIncome(40 * 50))!
             }
         }
         return income
